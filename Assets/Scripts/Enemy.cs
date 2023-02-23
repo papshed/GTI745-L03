@@ -4,16 +4,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public AudioClip clip;
+    public RectTransform loseButton = null;
 
     private AudioSource audioSource;
 
     private TextMeshProUGUI loseText = null;
     private TextMeshProUGUI scoreText = null;
-    private static int Score = 0;
 
     private void Start() {
         loseText = GameObject.FindWithTag("Lose").GetComponent<TextMeshProUGUI>();
         loseText.enabled = false;
+        
+        if (loseButton) {
+            loseButton.localScale = Vector3.zero;
+        }
         
         scoreText = GameObject
             .FindWithTag("Score")
@@ -26,6 +30,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !Gode.IsPaused) {
             Debug.Log("Look Ma, I'm colliding with the player!");
+            
+            if (loseButton) {
+                loseButton.localScale = Vector3.one;
+            }
             
             loseText.enabled = true;
             scoreText.enabled = false;

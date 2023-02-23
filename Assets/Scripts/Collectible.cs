@@ -50,12 +50,14 @@ public class Collectible : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        Score++;
+        Score+=5;
         scoreText.text = $"Score: {Score}/5";
 
         if (Score == 5) {
             winText.enabled = true;
             Gode.IsPaused = true;
+            Gode.victory();
+            Score = 0;
         }
     }
 
