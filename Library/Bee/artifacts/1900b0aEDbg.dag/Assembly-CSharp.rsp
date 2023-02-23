@@ -360,7 +360,11 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.2.2f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.2.2f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/BallController.cs"
+"Assets/Scripts/Collectible.cs"
 "Assets/Scripts/Connection.cs"
+"Assets/Scripts/Enemy.cs"
+"Assets/Scripts/Gode.cs"
+"Assets/Scripts/MP3.cs"
 -langversion:9.0
 
 /deterministic

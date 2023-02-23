@@ -2,24 +2,36 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallController : MonoBehaviour {
-    public Camera Camera;
+    public Camera mainCamera;
+    public GameObject spotlight;
 
     private Transform Transform => transform;
     private Rigidbody Rigidbody => GetComponent<Rigidbody>();
 
-    public bool Grounded = false;
-
     private void Update() {
-        Grounded = isGrounded();
+        if (Gode.IsPaused) {
+            halt();
+            return;   
+        }
+
+        var position = Transform.position;
+
+        var cameraPosition = mainCamera.transform.position;
+        mainCamera.transform.position = new Vector3(
+            position.x,
+            cameraPosition.y,
+            position.z
+        );
+
+        var spotlightPosition = spotlight.transform.position;
+        spotlight.transform.position = new Vector3(
+            position.x,
+            spotlightPosition.y,
+            position.z
+        );
 
         if (isGrounded())
             roll();
-
-        Camera.transform.position = new Vector3(
-            Transform.position.x,
-            Camera.transform.position.y,
-            Transform.position.z
-        );
     }
 
     private bool isGrounded() {
@@ -27,13 +39,13 @@ public class BallController : MonoBehaviour {
             transform.position,
             Vector3.down,
             out var hit,
-            0.55f
+            0.6f
         );
 
         if (isGrounded) {
             Debug.DrawRay(
                 transform.position,
-                transform.TransformDirection(Vector3.down) * hit.distance,
+                Vector3.down,
                 Color.red
             );
 
@@ -42,7 +54,7 @@ public class BallController : MonoBehaviour {
 
         Debug.DrawRay(
             transform.position,
-            transform.TransformDirection(Vector3.down) * Transform.position.y,
+            Vector3.down,
             Color.yellow
         );
 
@@ -65,13 +77,13 @@ public class BallController : MonoBehaviour {
             addForce(Vector3.back);
 
         if (Input.GetKey(KeyCode.D))
-            addForce(Vector3.back);
+            addForce(Vector3.right);
 
         if (Input.GetKey(KeyCode.Space))
             halt();
 
-        if (Input.GetKey(KeyCode.LeftShift))
-            addForce(Vector3.up, 25f);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            addForce(Vector3.up, 250f);
     }
 
     private void halt() {

@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - Collectible Spotlight
+  - Score
+  - Win
+  - Lose
+  - Audio
+  - Menu
   layers:
   - Default
   - TransparentFX
